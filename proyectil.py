@@ -23,6 +23,7 @@ targets = []
 target_speed = 1
 ball_speed = vector(300, 300)
 
+
 def tap(x, y):
     """ Función que calcula la velocidad de la pelota
     con los valores del click del mouse en la pantalla.
@@ -38,13 +39,21 @@ def tap(x, y):
         speed.y = (y + ball_speed.y) / 25
 
 
+
 def inside(xy):
-    """Return True if xy within screen."""
+    """Devuelve un valor booleano si el objeto está dentro de la pantalla
+
+    Args:
+        xy ([vector]): [recibe un vector de la posición del objeto]
+
+    Returns:
+        [bool]: [regresa true o false si el objeto esta dentro de la pantalla]
+    """
     return -200 < xy.x < 200 and -200 < xy.y < 200
 
 
 def draw():
-    """Draw ball and targets."""
+    """Dibuja las pelotas tanto la del objetivo como el disparo principal."""
     clear()
 
     for target in targets:
@@ -59,7 +68,7 @@ def draw():
 
 
 def move():
-    """Move ball and targets."""
+    """Mueve los objetivos y la pelota principal"""
     if randrange(40) == 0:
         y = randrange(-150, 150)
         target = vector(200, y)
@@ -80,11 +89,6 @@ def move():
             targets.append(target)
 
     draw()
-
-    for target in targets:
-        if not inside(target):
-            return
-
     ontimer(move, 50)
 
 
