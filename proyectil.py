@@ -89,6 +89,7 @@ def move():
             targets.append(target)
 
     draw()
+
     ontimer(move, 50)
 
 
