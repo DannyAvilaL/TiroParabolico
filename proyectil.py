@@ -20,12 +20,12 @@ from freegames import vector
 ball = vector(-200, -200)
 speed = vector(0, 0)
 targets = []
-target_speed = 1
+target_speed = 6
 ball_speed = vector(300, 300)
 
 
 def tap(x, y):
-    """ Función que calcula la velocidad de la pelota
+    """Función que calcula la velocidad de la pelota
     con los valores del click del mouse en la pantalla.
 
     Args:
@@ -37,7 +37,6 @@ def tap(x, y):
         ball.y = -199
         speed.x = (x + ball_speed.x) / 30
         speed.y = (y + ball_speed.y) / 25
-
 
 
 def inside(xy):
@@ -58,11 +57,11 @@ def draw():
 
     for target in targets:
         goto(target.x, target.y)
-        dot(20, 'blue')
+        dot(20, "blue")
 
     if inside(ball):
         goto(ball.x, ball.y)
-        dot(6, 'red')
+        dot(6, "red")
 
     update()
 
@@ -74,8 +73,8 @@ def move():
         target = vector(200, y)
         targets.append(target)
 
-    for target in targets:  #velocidad de los targets
-        target.x -= target_speed 
+    for target in targets:  # velocidad de los targets
+        target.x -= target_speed
 
     if inside(ball):
         speed.y -= 0.35
@@ -87,6 +86,10 @@ def move():
     for target in dupe:
         if abs(target - ball) > 13:
             targets.append(target)
+
+    for target in targets:
+        if not inside(target):
+            target.x = 200
 
     draw()
     ontimer(move, 50)
